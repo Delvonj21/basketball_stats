@@ -16,4 +16,44 @@ class Stat:
         self.date = data["date"]
         self.created_at = data["created_at"]
         self.updated_at = data["updated_at"]
+
+    #! READ
+    @classmethod
+    def get_by_id(cls, id):
+        query = "SELECT * FROM stats WHERE stats.id = %(id)s"
+
+        results = connectToMySQL(cls.db).query_db(query, {"id": id})
+
+        return cls(results[0])
+    
+    @classmethod
+    def get_all(cls):
+        query = "SELECT * FROM stats"
+
+        results = connectToMySQL(cls.db).query_db(query, {"id": id})
+
+        stats = []
+        for stat in results:
+            stats.append(cls(stat))
+
+        return stats
+    #! CREATE
+    @classmethod
+    def add_stats(cls, stat):
+        query = "INSERT INTO stats (user_id, name, points, assists, rebounds, opponent, date) VALUES (%(user_id)s, %(name)s, %(points)s, %(assists)s, %(rebounds)s, %(opponent)s, %(date)s)"
+
+        return connectToMySQL(cls.db).query_db(query, stat)
+    
+    #! DELETE
+    @classmethod
+    def delete(cls, id):
+        query = "DELETE FROM stats WHERE stats.id = %(id)s"
+        connectToMySQL(cls.db).query_db(query, {"id": id})
+
+    #!UPDATE
+    @classmethod
+    def update_stats(cls, stat):
+        query = "UPDATE stats SET date=%(date)s, points=%(points)s, rebounds=%(rebounds)s, opponent=%(opponent)s, assists=%(assists)s WHERE id = %(id)s"
+
+        return connectToMySQL(cls.db).query_db(query, stat)
        

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-top: 50px;
+    }
+    h1, h2 {
+      color: #007bff;
+      text-align: center;
+    }
+    .btn-primary {
+      margin-top: 10px;
+    }
+  </style>
+  <title>Update Stats</title>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <!-- Left Corner: Username -->
+      <div class="col-md-6">
+        <h2>[Username]</h2>
+      </div>
+
+      <!-- Right Side: Return to Dashboard Button -->
+      <div class="col-md-6 text-right">
+        <a href="/stats" class="btn btn-primary">Return to Dashboard</a>
+      </div>
+    </div>
+
+    <h1 class="mb-4">Edit Game</h1>
+
+    <!-- Input Fields -->
+    <form action="/stat/update" method="POST">
+      <div class="form-group">
+        <label for="date">Date</label>
+        <input type="date" class="form-control-sm" name="date">
+      </div>
+      <div class="form-group">
+        <label for="opponent">Opponent</label>
+        <input type="text" class="form-control-sm" name="opponent">
+      </div>
+      <div class="form-group">
+        <label for="points">Points</label>
+        <input type="number" class="form-control-sm" name="points">
+      </div>
+      <div class="form-group">
+        <label for="assists">Assists</label>
+        <input type="number" class="form-control-sm" name="assists">
+      </div>
+      <div class="form-group">
+        <label for="rebounds">Rebounds</label>
+        <input type="number" class="form-control-sm" name="rebounds">
+      </div>
+
+      <!-- Add Game Button -->
+      <button class="btn btn-primary">Update</button>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

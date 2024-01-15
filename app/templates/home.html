@@ -49,6 +49,15 @@
     <div class="col-md-6">
         <h2 class="mb-4 text-center">Register</h2>
         <form action="/user/register" method="POST">
+          {% with messages = get_flashed_messages(category_filter=['info']) %}
+                {% if messages %}
+                 <div class="alert alert-danger" role="alert">
+                      {% for message in messages %}
+                      <p>{{message}}</p>
+                      {% endfor %}
+                  </div>
+                  {% endif %}
+            {% endwith %}
           
           <div class="form-group">
             <label for="first_name">First Name</label>
@@ -72,19 +81,9 @@
           </div>
           <div class="text-center text-danger mb-3">
 
-            <!-- Validation messages can be displayed here -->
-            {% with messages = get_flashed_messages(category_filter=['register']) %}
-            {% if messages %}
-            <div class="alert alert-danger" role="alert">
-                {% for message in messages %}
-                <p>{{message}}</p>
-                {% endfor %}
-            </div>
-            {% endif %}
-        {% endwith %}
 
           </div>
-          <input type="button" value="Register" class="btn btn-primary">
+          <button class="btn btn-primary">Register</button>
         </form>
       </div>
 
@@ -93,29 +92,28 @@
       <div class="col-md-6">
         <h2 class="mb-4 text-center">Login</h2>
         <form action="/user/login" method="POST">
-          
+          {% with messages = get_flashed_messages(category_filter=['info']) %}
+                            {% if messages %}
+                            <div class="alert alert-danger" role="alert">
+                                {% for message in messages %}
+                                <p>{{message}}</p>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        {% endwith %}
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" name="email">
+            <input type="email" class="form-control" name="email" id="email">
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" name="password">
+            <input type="password" class="form-control" name="password" id="password">
           </div>
           <div class="text-center text-danger mb-3">
-            <!-- Validation messages can be displayed here -->
-            {% with messages = get_flashed_messages(category_filter=['login']) %}
-              {% if messages %}
-              <div class="alert alert-danger" role="alert">
-                  {% for message in messages %}
-                  <p>{{message}}</p>
-                  {% endfor %}
-              </div>
-              {% endif %}
-          {% endwith %}
+           
 
           </div>
-          <input type="button" value="Login" class="btn btn-success">
+          <button class="btn btn-success">Login</button>
         </form>
       </div>
     </div>

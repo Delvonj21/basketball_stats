@@ -2,7 +2,6 @@ from app import app
 from flask_bcrypt import Bcrypt
 from flask import render_template, request, flash, redirect, session
 from app.models.user import User
-# from app.models.stat import Stat
 
 bcrypt = Bcrypt(app)
 
@@ -12,10 +11,10 @@ def home():
     return render_template("home.html")
 
 
-# #! READ
-# @app.route("/user/pets/<int:id>")
-# def get_user(id):
-#     return render_template("user_pets.html", user=User.get_by_id(id))
+#! READ
+@app.route("/user/stats/<int:id>")
+def get_user(id):
+    return render_template("user_stats.html", user=User.get_by_id(id))
 
 
 #! REGISTER
@@ -30,7 +29,7 @@ def user_register():
                 "password": bcrypt.generate_password_hash(request.form["password"]),
             }
         )
-        flash("Thank you for registering", "register")
+        flash("Thank you for registering", "info")
 
     return redirect("/")
 
@@ -45,7 +44,7 @@ def user_login():
     if found_user and bcrypt.check_password_hash(found_user.password, password):
         session["user_id"] = found_user.id
         flash("Welcome Back")
-        return redirect("/pets")
+        return redirect("/stats")
 
     flash("Invalid Credentials")
     return redirect("/")
@@ -55,3 +54,4 @@ def user_login():
 def user_logout():
     session.clear()
     return redirect("/")
+
