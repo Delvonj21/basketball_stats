@@ -3,6 +3,8 @@ from flask_bcrypt import Bcrypt
 from flask import render_template, request, flash, redirect, session
 from app.models.stat import Stat
 
+
+
 #! READ
 @app.route("/stats")
 def get_all_stats():
@@ -10,24 +12,29 @@ def get_all_stats():
   if 'user_id' not in session:
     flash("You're not logged in!!")
     return redirect('/')
+
   
   return render_template("dashboard.html", stats=Stat.get_all())
 
 #! READ
 @app.route("/stat/<int:id>")
 def get_one(id):
-    return render_template("summary.html", stat=Stat.get_by_id(id))
+    return render_template("view_game.html", stat=Stat.get_by_id(id))
 
 #! CREATE
 @app.route("/stat")  # ? GET - <a> tags
 def get_add_stat_form():
-    return render_template("add_stat.html")
+    if "user_id" in session:
+        return render_template("add_stat.html")
+    else:
+        return redirect("/")
 
 
 @app.route("/stat", methods=["POST"])  # ? POST - <form> tags
 def add_stat():
     Stat.add_stats({
             "user_id": session["user_id"],
+            "name": request.form["name"],
             "points": request.form["points"],
             "assists": request.form["assists"],
             "rebounds": request.form["rebounds"],
@@ -46,17 +53,17 @@ def update_stat_form(id):
 
 @app.route("/stat/update", methods=["POST"])  # ? POST - <form> tags
 def update_stat():
-    Stat.update(
+    Stat.update_stats(
         {
-            "id": request.form["id"],
-            "date": request.form["date"],
-            "opponent": request.form["opponent"],
+            "user_id": session["user_id"],
+            "name": request.form["name"],
             "points": request.form["points"],
             "assists": request.form["assists"],
-            "rebounds": request.form["rebounds"]
+            "rebounds": request.form["rebounds"],
+            "opponent": request.form["opponent"],
+            "date": request.form["date"],
         }
     )
-    flash(f"Updated {request.form['name']}", "info")
     return redirect("/stats")  # redirect when data is updated
 
 

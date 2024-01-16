@@ -18,7 +18,7 @@ class User:
 
     @classmethod
     def get_by_id(cls, id):
-        query = "SELECT * FROM users LEFT JOIN pets ON stats.user_id = users.id WHERE users.id = %(id)s"
+        query = "SELECT * FROM users LEFT JOIN stats ON stats.user_id = users.id WHERE users.id = %(id)s"
 
         results = connectToMySQL(cls.db).query_db(query, {"id": id})
 

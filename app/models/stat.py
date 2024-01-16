@@ -6,7 +6,7 @@ class Stat:
     db = "bball_stats"
 
     def __init__(self, data):
-        self.id = data[""]
+        self.id = data["id"]
         self.user_id = data["user_id"]
         self.name = data["name"]
         self.points = data["points"]
@@ -39,10 +39,10 @@ class Stat:
         return stats
     #! CREATE
     @classmethod
-    def add_stats(cls, stat):
+    def add_stats(cls, data):
         query = "INSERT INTO stats (user_id, name, points, assists, rebounds, opponent, date) VALUES (%(user_id)s, %(name)s, %(points)s, %(assists)s, %(rebounds)s, %(opponent)s, %(date)s)"
 
-        return connectToMySQL(cls.db).query_db(query, stat)
+        return connectToMySQL(cls.db).query_db(query, data)
     
     #! DELETE
     @classmethod
@@ -53,7 +53,7 @@ class Stat:
     #!UPDATE
     @classmethod
     def update_stats(cls, stat):
-        query = "UPDATE stats SET date=%(date)s, points=%(points)s, rebounds=%(rebounds)s, opponent=%(opponent)s, assists=%(assists)s WHERE id = %(id)s"
+        query = "UPDATE stats SET name=%(name)s, points=%(points)s, assists=%(assists)s, rebounds=%(rebounds)s, opponent=%(opponent)s, date=%(date)s WHERE id = %(id)s"
 
         return connectToMySQL(cls.db).query_db(query, stat)
        

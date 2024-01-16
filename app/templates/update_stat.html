@@ -35,36 +35,44 @@
 
       <!-- Right Side: Return to Dashboard Button -->
       <div class="col-md-6 text-right">
-        <a href="/stats" class="btn btn-primary">Return to Dashboard</a>
+        <a href="/user/logout" class="btn btn-danger">Logout</a> <a href="/stats" class="btn btn-primary">Return to Dashboard</a>
       </div>
     </div>
 
-    <h1 class="mb-4">Edit Game</h1>
+    <h1 class="mb-4">Edit Stats</h1>
 
     <!-- Input Fields -->
     <form action="/stat/update" method="POST">
-      <div class="form-group">
+      
+    <!-- Hidden ID-->
+    <input type="hidden" name="id" value="{{ stat.id }}">
+    
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control-sm" name="name" value="{{ stat.name }}">
+    </div>
+    <div class="form-group">
         <label for="date">Date</label>
-        <input type="date" class="form-control-sm" name="date">
-      </div>
-      <div class="form-group">
+        <input type="date" class="form-control-sm" name="date" value="{{ stat.date }}">
+    </div>
+    <div class="form-group">
         <label for="opponent">Opponent</label>
-        <input type="text" class="form-control-sm" name="opponent">
-      </div>
-      <div class="form-group">
+        <input type="text" class="form-control-sm" name="opponent" value="{{ stat.opponent }}">
+    </div>
+    <div class="form-group">
         <label for="points">Points</label>
-        <input type="number" class="form-control-sm" name="points">
-      </div>
-      <div class="form-group">
+        <input type="number" class="form-control-sm" name="points" value="{{ stat.points }}">
+    </div>
+    <div class="form-group">
         <label for="assists">Assists</label>
-        <input type="number" class="form-control-sm" name="assists">
-      </div>
-      <div class="form-group">
+        <input type="number" class="form-control-sm" name="assists" value="{{ stat.assists }}">
+    </div>
+    <div class="form-group">
         <label for="rebounds">Rebounds</label>
-        <input type="number" class="form-control-sm" name="rebounds">
+        <input type="number" class="form-control-sm" name="rebounds" value="{{ stat.rebounds }}">
       </div>
 
-      <!-- Add Game Button -->
+      <!-- Update Button -->
       <button class="btn btn-primary">Update</button>
     </form>
   </div>

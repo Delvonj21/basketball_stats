@@ -59,9 +59,6 @@
         <a href="/stat">
           <button class="btn btn-primary">Add New Stats</button>
         </a>
-        <a href="/stat/1">
-          <button class="btn btn-success">Game Summary</button>
-        </a>
       </div>
     </div>
 
@@ -72,24 +69,28 @@
       <thead>
         <tr>
           <th>Name</th>
-          <th>Total Points</th>
-          <th>Total Assists</th>
-          <th>Total Rebounds</th>
+          <th>Points</th>
+          <th>Assists</th>
+          <th>Rebounds</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <!-- Table data goes here -->
+        {% for stat in stats %}
         <tr>
-          <td>Player 1</td>
-          <td>100</td>
-          <td>50</td>
-          <td>30</td>
+          <td>{{ stat.name }}</td>
+          <td>{{ stat.points }}</td>
+          <td>{{ stat.assists }}</td>
+          <td>{{ stat.rebounds }}</td>
+          <td>
+            <a href="/stat/update/{{ stat.id }}">Edit</a> | <a href="/stat/delete/{{ stat.id }}">Delete</a> | <a href="/stat/{{ stat.id }}">View</a> 
+          </td>
         </tr>
+        {% endfor %}
       </tbody>
     </table>
 
-    <!-- Edit Profile Button -->
-    <input type="button" value="Edit Profile" class="btn btn-primary" href="">
      <!-- Logout-->
     <a href="/user/logout">Logout</a>
     </div>

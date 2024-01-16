@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-top: 50px;
+    }
+    h1, h2 {
+      color: #007bff;
+      text-align: center;
+    }
+    .btn-primary {
+      margin-top: 10px;
+    }
+    .card {
+      background-color: #007bff;
+      color: white;
+      margin-top: 20px;
+    }
+    .card-header {
+      background-color: #ff6600; 
+    }
+    .unique-field {
+      color: #ff6600; 
+    }
+  </style>
+  <title>View Game</title>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <!-- Left Corner: Username -->
+      <div class="col-md-6">
+        <h2> [username] </h2>
+      </div>
+
+      <!-- Right Side: Return to Dashboard Button -->
+      <div class="col-md-6 text-right">
+        <a href="/stats" class="btn btn-primary">Return to All Games</a>
+      </div>
+    </div>
+
+    <h1 class="mb-4">{{ stat.opponent }} [Game View]</h1>
+
+    <!-- Opponent Stats Card -->
+    <div class="card">
+      <!-- <div class="card-header unique-field">
+   
+      </div> -->
+      <div class="card-body">
+        <h5 class="card-title">Date: {{ stat.date }}</h5>
+        <p class="card-title">Points: {{ stat.points }}</p>
+        <p class="card-title">Assists: {{ stat.assists }}</p>
+        <p class="card-title">Rebounds: {{ stat.rebounds }}</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
