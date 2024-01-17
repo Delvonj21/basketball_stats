@@ -8,14 +8,13 @@ class Stat:
     def __init__(self, data):
         self.id = data["id"]
         self.user_id = data["user_id"]
-        self.name = data["name"]
         self.points = data["points"]
         self.assists = data["assists"]
         self.rebounds = data["rebounds"]
         self.opponent = data["opponent"]
         self.date = data["date"]
-        self.created_at = data["created_at"]
-        self.updated_at = data["updated_at"]
+        # self.created_at = data["created_at"]
+        # self.updated_at = data["updated_at"]
 
     #! READ
     @classmethod
@@ -40,7 +39,7 @@ class Stat:
     #! CREATE
     @classmethod
     def add_stats(cls, data):
-        query = "INSERT INTO stats (user_id, name, points, assists, rebounds, opponent, date) VALUES (%(user_id)s, %(name)s, %(points)s, %(assists)s, %(rebounds)s, %(opponent)s, %(date)s)"
+        query = "INSERT INTO stats (user_id, points, assists, rebounds, opponent, date) VALUES (%(user_id)s, %(points)s, %(assists)s, %(rebounds)s, %(opponent)s, %(date)s)"
 
         return connectToMySQL(cls.db).query_db(query, data)
     
@@ -53,7 +52,7 @@ class Stat:
     #!UPDATE
     @classmethod
     def update_stats(cls, stat):
-        query = "UPDATE stats SET name=%(name)s, points=%(points)s, assists=%(assists)s, rebounds=%(rebounds)s, opponent=%(opponent)s, date=%(date)s WHERE id = %(id)s"
+        query = "UPDATE stats SET  points=%(points)s, assists=%(assists)s, rebounds=%(rebounds)s, opponent=%(opponent)s, date=%(date)s WHERE id = %(id)s"
 
         return connectToMySQL(cls.db).query_db(query, stat)
        

@@ -33,13 +33,12 @@ class User:
                     Stat(
                         {
                             "id": row["stats.id"],
-                            "name": row["name"],
                             "user_id": row["user_id"],
-                            "points": row["pet_type"],
-                            "assists": row["trick"],
-                            "rebounds": row["happiness"],
-                            "opponent": row["energy"],
-                            "date": row["energy"],
+                            "points": row["points"],
+                            "assists": row["assists"],
+                            "rebounds": row["rebounds"],
+                            "opponent": row["opponent"],
+                            "date": row["date"],
                         }
                     )
                 )

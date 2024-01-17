@@ -2,39 +2,34 @@ from app import app
 from flask_bcrypt import Bcrypt
 from flask import render_template, request, flash, redirect, session
 from app.models.stat import Stat
-
-
+from app.decorators import login_required
 
 #! READ
 @app.route("/stats")
-def get_all_stats():
+@login_required()
+def get_all_stats(user):
 
-  if 'user_id' not in session:
-    flash("You're not logged in!!")
-    return redirect('/')
-
-  
-  return render_template("dashboard.html", stats=Stat.get_all())
+  return render_template("dashboard.html", stats=Stat.get_all(), user = user)
 
 #! READ
 @app.route("/stat/<int:id>")
-def get_one(id):
-    return render_template("view_game.html", stat=Stat.get_by_id(id))
+@login_required()
+def get_one(user, id):
+
+    return render_template("view_game.html", stat=Stat.get_by_id(id), user = user)
 
 #! CREATE
 @app.route("/stat")  # ? GET - <a> tags
-def get_add_stat_form():
-    if "user_id" in session:
-        return render_template("add_stat.html")
-    else:
-        return redirect("/")
-
+@login_required()
+def get_add_stat_form(user):
+    return render_template("add_stat.html", user=user)
+   
 
 @app.route("/stat", methods=["POST"])  # ? POST - <form> tags
-def add_stat():
+@login_required()
+def add_stat(user):
     Stat.add_stats({
             "user_id": session["user_id"],
-            "name": request.form["name"],
             "points": request.form["points"],
             "assists": request.form["assists"],
             "rebounds": request.form["rebounds"],
@@ -47,16 +42,18 @@ def add_stat():
 
 #! UPDATE
 @app.route("/stat/update/<int:id>")  # ? GET - <a> tags
-def update_stat_form(id):
-    return render_template("update_stat.html", stat=Stat.get_by_id(id))
+@login_required()
+def update_stat_form(user, id):
+    return render_template("update_stat.html", stat=Stat.get_by_id(id), user=user)
 
 
 @app.route("/stat/update", methods=["POST"])  # ? POST - <form> tags
-def update_stat():
+@login_required()
+def update_stat(user):
     Stat.update_stats(
         {
+            "id": request.form["id"],
             "user_id": session["user_id"],
-            "name": request.form["name"],
             "points": request.form["points"],
             "assists": request.form["assists"],
             "rebounds": request.form["rebounds"],
@@ -69,7 +66,9 @@ def update_stat():
 
 #! DELETE
 @app.route("/stat/delete/<int:id>")
-def delete(id):
+@login_required()
+def delete(user, id):
+  
     Stat.delete(id)
     flash("Stats deleted", "info")
     return redirect("/stats")

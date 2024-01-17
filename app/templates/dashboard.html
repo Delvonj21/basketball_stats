@@ -51,7 +51,7 @@
     
       <!-- Left Side: Welcome and User -->
       <div class="col-md-6">
-        <h2>Welcome, [username]</h2>
+        <h2>Welcome, {{ user.first_name }}!</h2>
       </div>
 
       <!-- Right Side: Buttons -->
@@ -68,7 +68,7 @@
     <table class="table table-hover mb-4">
       <thead>
         <tr>
-          <th>Name</th>
+          <th>Opponent</th>
           <th>Points</th>
           <th>Assists</th>
           <th>Rebounds</th>
@@ -79,12 +79,12 @@
         <!-- Table data goes here -->
         {% for stat in stats %}
         <tr>
-          <td>{{ stat.name }}</td>
+          <td>{{ stat.opponent }}</td>
           <td>{{ stat.points }}</td>
           <td>{{ stat.assists }}</td>
           <td>{{ stat.rebounds }}</td>
           <td>
-            <a href="/stat/update/{{ stat.id }}">Edit</a> | <a href="/stat/delete/{{ stat.id }}">Delete</a> | <a href="/stat/{{ stat.id }}">View</a> 
+            <a href="/stat/update/{{ stat.id }}">Update</a> | <a href="/stat/delete/{{ stat.id }}">Delete</a> | <a href="/stat/{{ stat.id }}">View</a> 
           </td>
         </tr>
         {% endfor %}

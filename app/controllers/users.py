@@ -14,23 +14,37 @@ def home():
 #! READ
 @app.route("/user/stats/<int:id>")
 def get_user(id):
-    return render_template("user_stats.html", user=User.get_by_id(id))
+
+    
+    # Check if the user is logged in
+    if 'user_id' not in session or session['user_id'] != id:
+        flash("You are not logged in!!!")
+        return redirect("/")
+    
+    user = User.get_by_id(id)
+
+    if not user:
+        flash("User not found")
+        return redirect("/")
+    
+    return render_template("user_stats.html", user=user)
 
 
 #! REGISTER
 @app.route("/user/register", methods=["POST"])
 def user_register():
     if User.validate_new_user(request.form):
-        User.create(
-            {
+        new_user = {
                 "first_name": request.form["first_name"],
                 "last_name": request.form["last_name"],
                 "email": request.form["email"],
                 "password": bcrypt.generate_password_hash(request.form["password"]),
-            }
-        )
-        flash("Thank you for registering", "info")
+        }
+        user_id = User.create(new_user)
 
+        session['user_id'] = user_id
+        flash("Thank You for registering", "info")
+    
     return redirect("/")
 
 
